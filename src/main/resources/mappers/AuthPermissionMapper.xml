@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zooway.antdvpro.mapper.AuthPermissionMapper">
+    <resultMap id="baseResultMap" type="org.zooway.antdvpro.model.po.AuthPermissionPO">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="key" column="`key`" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="icon" column="icon" jdbcType="VARCHAR"/>
+        <result property="path" column="path" jdbcType="VARCHAR"/><!-- 路由路径, 为空会使用key与父路由的key进行拼接 -->
+        <result property="component" column="component" jdbcType="VARCHAR"/>
+        <result property="redirect" column="redirect" jdbcType="VARCHAR"/><!-- 重定向地址, 为空表示不重写重定向地址 -->
+        <result property="target" column="target" jdbcType="VARCHAR"/>
+        <result property="show" column="`show`" jdbcType="BIT"/>
+        <result property="hideChildren" column="hide_children" jdbcType="BIT"/><!-- 是否隐藏子菜单 -->
+        <result property="hiddenHeaderContent" column="hidden_header_content" jdbcType="BIT"/><!-- 是否隐藏隐藏面包屑和页面标题栏 -->
+        <result property="parentId" column="parent_id" jdbcType="BIGINT"/><!-- 父路由id -->
+        <result property="type" column="type" jdbcType="INTEGER"/><!-- 父路由id -->
+        <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+</mapper>

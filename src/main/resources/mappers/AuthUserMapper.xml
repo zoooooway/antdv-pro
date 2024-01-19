@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zooway.antdvpro.mapper.AuthUserMapper">
+    <resultMap id="baseResultMap" type="org.zooway.antdvpro.model.po.AuthUserPO">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/><!-- 用户名 -->
+        <result property="password" column="password" jdbcType="VARCHAR"/><!-- 密码 -->
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/><!-- 创建日期 -->
+        <result property="createUser" column="create_user" jdbcType="VARCHAR"/><!-- 创建人 -->
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/><!-- 更新日期 -->
+        <result property="updateUser" column="update_user" jdbcType="VARCHAR"/><!-- 更新人 -->
+        <result property="lastLogin" column="last_login" jdbcType="TIMESTAMP"/><!-- 最后登录 -->
+    </resultMap>
+    <select id="selectUserList" resultType="org.zooway.antdvpro.model.dto.AuthUserDTO">
+        select u.id, u.username, r.role_name as roleName, r.id as roleId, u.create_time as createTime,
+        u.last_login as lastLogin
+        from auth_user as u
+        left join auth_user_role as ur on ur.user_id = u.id
+        left join auth_role as r on r.id = ur.role_id
+        <where>
+            <if test="username != null and username != ''">
+                and u.username like concat('%', #{username}, '%')
+            </if>
+            <if test="roles != null and roles != ''">
+                and r.id in (#{roles})
+            </if>
+        </where>
+        group by u.id
+    </select>
+
+
+</mapper>
